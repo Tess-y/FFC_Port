@@ -7,37 +7,37 @@ using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
 
-namespace Ported_FFC.Cards.LightGunner
+namespace Ported_FFC.Cards.Marksman
 {
-    public class LightGunner : CustomCard
+    public class SniperRifleExtendedMag : CustomCard
     {
-        private const float MaxHealth = 1.10f;
-        private const float MovementSpeed = 1.10f;
-        private const int MaxAmmo = 3;
+        private const float ReloadSpeed = 1.10f;
+        private const float MovementSpeed = 0.95f;
+        private const int MaxAmmo = 1;
 
         protected override string GetTitle()
         {
-            return "Light Gunner";
+            return "Sniper Rifle Extended Mag";
         }
 
         protected override string GetDescription()
         {
-            return "As a Light Gunner your prioritize movement over Defence and Health";
+            return "Then only way to add ammo if you have Barret .50 Cal!";
         }
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers)
         {
-            gun.ammo = MaxAmmo;
-            statModifiers.health = MaxHealth;
+            gun.reloadTime = ReloadSpeed;
             statModifiers.movementSpeed = MovementSpeed;
 
-            cardInfo.allowMultiple = false;
-            gameObject.GetOrAddComponent<ClassNameMono>();
+            gameObject.GetOrAddComponent<ClassNameMono>().className = MarksmanClass.name;
         }
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
-        {
+        {/// TODO: figure this shit out
+           // characterStats.GetAdditionalData().extendedMags += MaxAmmo;
         }
+
         public override void OnRemoveCard()
         {
         }
@@ -45,20 +45,20 @@ namespace Ported_FFC.Cards.LightGunner
         protected override CardInfoStat[] GetStats()
         {
             return new[] {
-                ManageCardInfoStats.BuildCardInfoStat("Health", true, MaxHealth),
-                ManageCardInfoStats.BuildCardInfoStat("Movement Speed", true, MovementSpeed),
-                ManageCardInfoStats.BuildCardInfoStat("Max Ammo", true, null, $"+{MaxAmmo}")
+                ManageCardInfoStats.BuildCardInfoStat("Reload Speed", true, null, $"+{MaxAmmo}"),
+                ManageCardInfoStats.BuildCardInfoStat("Reload Speed", false, ReloadSpeed),
+                ManageCardInfoStats.BuildCardInfoStat("Movement Cooldown", false, MovementSpeed)
             };
         }
 
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Common;
+            return CardInfo.Rarity.Uncommon;
         }
 
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
-            return CardThemeColor.CardThemeColorType.EvilPurple;
+            return CardThemeColor.CardThemeColorType.DefensiveBlue;
         }
 
         protected override GameObject GetCardArt()

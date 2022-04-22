@@ -21,7 +21,7 @@ namespace Ported_FFC
         public const string ModInitials = "PFFC";
         public static PFFC instance { get; private set; }
 
-        private void Awake()
+        private void Awake() 
         {
             var harmony = new Harmony(ModId);
             harmony.PatchAll();
@@ -29,13 +29,7 @@ namespace Ported_FFC
 
         private void Start()
         {
-            instance = this;
-
-            foreach (Type type in Assembly.GetAssembly(typeof(PFFC)).GetTypes().Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(ClassHandler))))
-            {
-                ClassHandler handler = (ClassHandler)Activator.CreateInstance(type);
-                StartCoroutine(handler.Init());
-            }
+            instance = this; 
         }
 
     }

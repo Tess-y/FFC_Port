@@ -7,42 +7,31 @@ using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
 
-
-
-namespace Ported_FFC.Cards.LightGunner
+namespace Ported_FFC.Cards.Jester
 {
-    public class Dmr : CustomCard
+    public class WayOfTheJester : CustomCard
     {
-        private const float Damage = 1.50f;
-        private const float ProjectileSpeed = 1.50f;
-        private const float AttackSpeed = 2.00f;
-        private const float ReloadSpeed = 1.20f;
-
         protected override string GetTitle()
         {
-            return "DMR";
+            return "Way of the Jester";
         }
 
         protected override string GetDescription()
         {
-            return "More Damage and ammo, but less attack speed";
+            return
+                "PASSIVE: Your stats increase as your pick cards that give you more bounces. Stats are added per bounce. Capped at 25 bounces. Thanks Pong! ;)";
         }
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers)
         {
-            gun.dontAllowAutoFire = true;
-            gun.damage = Damage;
-            gun.projectileSpeed = ProjectileSpeed;
-            gun.attackSpeed = AttackSpeed;
-            gun.reloadTime = ReloadSpeed;
-
             cardInfo.allowMultiple = false;
 
-            gameObject.GetOrAddComponent<ClassNameMono>().className = LightGunnerClass.name;
+            gameObject.GetOrAddComponent<ClassNameMono>().className = JesterClass.name;
         }
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
-        {
+        {/// TODO: figure this shit out
+            //player.gameObject.GetOrAddComponent<WayOfTheJesterMono>();
         }
 
         public override void OnRemoveCard()
@@ -52,10 +41,24 @@ namespace Ported_FFC.Cards.LightGunner
         protected override CardInfoStat[] GetStats()
         {
             return new[] {
-                ManageCardInfoStats.BuildCardInfoStat("Damage", true, Damage),
-                ManageCardInfoStats.BuildCardInfoStat("Bullet Speed", true, ProjectileSpeed),
-                ManageCardInfoStats.BuildCardInfoStat("Attack Speed", false, AttackSpeed, "", "-"),
-                ManageCardInfoStats.BuildCardInfoStat("Reload Speed", false, ReloadSpeed)
+                new CardInfoStat {
+                    positive = true,
+                    stat = "Damage",
+                    amount = "+5%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat {
+                    positive = true,
+                    stat = "Movement Speed",
+                    amount = "+1%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat {
+                    positive = true,
+                    stat = "Projectile Speed",
+                    amount = "+3%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                }
             };
         }
 
@@ -66,7 +69,7 @@ namespace Ported_FFC.Cards.LightGunner
 
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
-            return CardThemeColor.CardThemeColorType.NatureBrown;
+            return CardThemeColor.CardThemeColorType.DefensiveBlue;
         }
 
         protected override GameObject GetCardArt()

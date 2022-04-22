@@ -7,37 +7,37 @@ using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
 
-namespace Ported_FFC.Cards.LightGunner
+
+namespace Ported_FFC.Cards.Juggernaut
 {
-    public class LightGunner : CustomCard
+    public class ArmorPlating : CustomCard
     {
-        private const float MaxHealth = 1.10f;
-        private const float MovementSpeed = 1.10f;
-        private const int MaxAmmo = 3;
+        private const float MaxHealth = 1.30f;
+        private const float ChanceToReflect = 1.10f;
 
         protected override string GetTitle()
         {
-            return "Light Gunner";
+            return "Armor Plating";
         }
 
         protected override string GetDescription()
         {
-            return "As a Light Gunner your prioritize movement over Defence and Health";
+            return "Sometimes you just need some extra padding";
         }
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers)
         {
-            gun.ammo = MaxAmmo;
             statModifiers.health = MaxHealth;
-            statModifiers.movementSpeed = MovementSpeed;
 
             cardInfo.allowMultiple = false;
-            gameObject.GetOrAddComponent<ClassNameMono>();
+
+            gameObject.GetOrAddComponent<ClassNameMono>().name = JuggernautClass.name;
         }
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
         }
+
         public override void OnRemoveCard()
         {
         }
@@ -46,19 +46,18 @@ namespace Ported_FFC.Cards.LightGunner
         {
             return new[] {
                 ManageCardInfoStats.BuildCardInfoStat("Health", true, MaxHealth),
-                ManageCardInfoStats.BuildCardInfoStat("Movement Speed", true, MovementSpeed),
-                ManageCardInfoStats.BuildCardInfoStat("Max Ammo", true, null, $"+{MaxAmmo}")
+                ManageCardInfoStats.BuildCardInfoStat("Chance to reflect", true, ChanceToReflect)
             };
         }
 
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Common;
+            return CardInfo.Rarity.Uncommon;
         }
 
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
-            return CardThemeColor.CardThemeColorType.EvilPurple;
+            return CardThemeColor.CardThemeColorType.DefensiveBlue;
         }
 
         protected override GameObject GetCardArt()

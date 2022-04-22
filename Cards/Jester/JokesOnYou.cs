@@ -7,37 +7,37 @@ using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
 
-namespace Ported_FFC.Cards.LightGunner
+
+namespace Ported_FFC.Cards.Jester
 {
-    public class LightGunner : CustomCard
+    public class JokesOnYou : CustomCard
     {
-        private const float MaxHealth = 1.10f;
-        private const float MovementSpeed = 1.10f;
-        private const int MaxAmmo = 3;
+        private const int Bounces = 3;
 
         protected override string GetTitle()
         {
-            return "Light Gunner";
+            return "Jokes on you!";
         }
 
         protected override string GetDescription()
         {
-            return "As a Light Gunner your prioritize movement over Defence and Health";
+            return "Your bouncing bullets no longer damage you!";
         }
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers)
         {
-            gun.ammo = MaxAmmo;
-            statModifiers.health = MaxHealth;
-            statModifiers.movementSpeed = MovementSpeed;
+            gun.reflects = Bounces;
 
             cardInfo.allowMultiple = false;
-            gameObject.GetOrAddComponent<ClassNameMono>();
+
+            gameObject.GetOrAddComponent<ClassNameMono>().className = JesterClass.name;
         }
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
-        {
+        {/// TODO: figure this shit out
+            //player.gameObject.GetOrAddComponent<JokesOnYouHitEffect>();
         }
+
         public override void OnRemoveCard()
         {
         }
@@ -45,15 +45,13 @@ namespace Ported_FFC.Cards.LightGunner
         protected override CardInfoStat[] GetStats()
         {
             return new[] {
-                ManageCardInfoStats.BuildCardInfoStat("Health", true, MaxHealth),
-                ManageCardInfoStats.BuildCardInfoStat("Movement Speed", true, MovementSpeed),
-                ManageCardInfoStats.BuildCardInfoStat("Max Ammo", true, null, $"+{MaxAmmo}")
+                ManageCardInfoStats.BuildCardInfoStat("Bounces", true, null, $"+{Bounces}"),
             };
         }
 
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Common;
+            return CardInfo.Rarity.Rare;
         }
 
         protected override CardThemeColor.CardThemeColorType GetTheme()
