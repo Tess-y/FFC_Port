@@ -13,7 +13,7 @@ namespace Ported_FFC.Cards.Juggernaut
     {
         private const float MaxHealth = 3.50f;
         private const float MovementSpeed = 0.65f;
-        private const float Gravity = 0.75f;
+        private const float JumpHight = 0.75f;
         private const float Size = 1.30f;
 
         protected override string GetTitle()
@@ -30,7 +30,7 @@ namespace Ported_FFC.Cards.Juggernaut
         {
             statModifiers.health = MaxHealth;
             statModifiers.movementSpeed = MovementSpeed;
-            statModifiers.jump = Gravity;
+            statModifiers.jump = JumpHight;
             statModifiers.sizeMultiplier = Size;
 
             cardInfo.allowMultiple = false;
@@ -51,7 +51,7 @@ namespace Ported_FFC.Cards.Juggernaut
             return new[] {
                 ManageCardInfoStats.BuildCardInfoStat("Health", true, MaxHealth),
                 ManageCardInfoStats.BuildCardInfoStat("Movement Speed", false, MovementSpeed),
-                ManageCardInfoStats.BuildCardInfoStat("Gravity", false, Gravity)
+                ManageCardInfoStats.BuildCardInfoStat("Jump Hight", false, JumpHight)
             };
         }
 
