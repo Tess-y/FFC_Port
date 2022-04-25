@@ -81,7 +81,15 @@ namespace Ported_FFC.Cards.Jester
             var multiplier = player.data.stats.GetAdditionalData().kingOfFools;
             var role = _rng.Next(1, 101);
 
-            if (multiplier == 0 || role > multiplier * BaseChance) return;
+            if (multiplier == 0 || role > multiplier * BaseChance || !player.data.view.IsMine) return;
+            NetworkingManager.RPC(typeof(KingOfFoolsHitSurfaceEffect), nameof(DoKingOfFoolsRPC), position, normal, velocity, player.playerID);
+        }
+
+        [UnboundRPC]
+        public static void DoKingOfFoolsRPC(Vector2 position, Vector2 normal, Vector2 velocity, int playerID)
+        {
+            Player player = PlayerManager.instance.players.Find(p => p.playerID == playerID);
+
             Gun gun = player.GetComponent<Holding>().holdable.GetComponent<Gun>();
 
             Gun newGun = player.gameObject.AddComponent<KingOfFoolsGun>();
@@ -114,7 +122,7 @@ namespace Ported_FFC.Cards.Jester
             effect.SetGun(newGun);
         }
 
-        private List<Vector3> GetPositions(Vector2 position, Vector2 normal, Vector2 parallel)
+        private static List<Vector3> GetPositions(Vector2 position, Vector2 normal, Vector2 parallel)
         {
             List<Vector3> res = new List<Vector3>() { };
 
@@ -123,7 +131,7 @@ namespace Ported_FFC.Cards.Jester
             return res;
         }
 
-        private List<Vector3> GetDirections(Vector2 position, List<Vector3> shootPos)
+        private static List<Vector3> GetDirections(Vector2 position, List<Vector3> shootPos)
         {
             List<Vector3> res = new List<Vector3>() { };
 

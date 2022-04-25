@@ -30,8 +30,8 @@ namespace Ported_FFC.Cards.Jester
         }
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
-        {/// TODO: figure this shit out
-            //player.gameObject.GetOrAddComponent<WayOfTheJesterMono>();
+        {
+            player.gameObject.GetOrAddComponent<WayOfTheJesterMono>();
         }
 
         public override void OnRemoveCard()
@@ -82,4 +82,48 @@ namespace Ported_FFC.Cards.Jester
             return PFFC.ModInitials;
         }
     }
+
+    public class WayOfTheJesterMono : MonoBehaviour
+    {
+        private const float Damage = 0.05f;
+        private float deltaDamage = 0f; 
+        private const float MovementSpeed = 0.01f;
+        private float deltaMovementSpeed = 0f;
+        private const float ProjectileSpeed = 0.03f;
+        private float deltaProjectileSpeed = 0f;
+        private int _bounces;
+        private Gun _gun;
+        private Player _player;
+        private int _previousBounces = 0;
+        private CharacterStatModifiers _stats;
+
+        public void Start()
+        {
+            if (_player == null) _player = gameObject.GetComponent<Player>();
+        }
+        private void Update()
+        {
+            if (_player == null) return;
+            _stats = _player.data.stats;
+            _gun = _player.GetComponent<Holding>().holdable.GetComponent<Gun>();
+            _bounces = _gun.reflects;
+            if (Mathf.Clamp(_bounces, 0, 25) == _previousBounces) return;
+            _previousBounces = Mathf.Clamp(_bounces,0,25);
+
+            _stats.movementSpeed -= deltaMovementSpeed;
+            _gun.damage -= deltaDamage;
+            _gun.projectileSpeed -= deltaProjectileSpeed;
+
+            deltaMovementSpeed = _stats.movementSpeed * MovementSpeed * _bounces;
+            deltaDamage = _gun.damage * Damage * _bounces;
+            deltaProjectileSpeed = _gun.projectileSpeed * _bounces * ProjectileSpeed;
+
+            _stats.movementSpeed += deltaMovementSpeed;
+            
+            _gun.damage += deltaDamage;
+
+            _gun.projectileSpeed += deltaProjectileSpeed;
+        }
+    }
+
 }
