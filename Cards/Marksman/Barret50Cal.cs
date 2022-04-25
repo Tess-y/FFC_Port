@@ -1,4 +1,7 @@
 ﻿using ClassesManagerReborn.Util;
+using ModdingUtils.RoundsEffects;
+using Photon.Pun;
+using Ported_FFC.Extensions;
 using Ported_FFC.Utils;
 using System;
 using System.Collections.Generic;
@@ -14,6 +17,8 @@ namespace Ported_FFC.Cards.Marksman
         private const float ReloadSpeed = 1.40f;
         private const float MovementSpeed = 0.90f;
         private const int MaxAmmo = 1;
+        private InstantKillHitEffect instantKillHitEffect;
+        private Barret50CalMono barret50CalMono;
 
         protected override string GetTitle()
         {
@@ -36,15 +41,15 @@ namespace Ported_FFC.Cards.Marksman
         }
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
-        {/// TODO: figure this shit out
-            /*
-            player.gameObject.GetOrAddComponent<InstantKillHitEffect>();
-            player.gameObject.GetOrAddComponent<Barret50CalMono>();
-            */
+        {
+            instantKillHitEffect = player.gameObject.GetOrAddComponent<InstantKillHitEffect>();
+            barret50CalMono = player.gameObject.GetOrAddComponent<Barret50CalMono>();
         }
 
         public override void OnRemoveCard()
         {
+            Destroy(instantKillHitEffect);
+            Destroy(barret50CalMono);
         }
 
         protected override CardInfoStat[] GetStats()
@@ -75,6 +80,43 @@ namespace Ported_FFC.Cards.Marksman
         public override string GetModName()
         {
             return PFFC.ModInitials;
+        }
+    }
+    public class InstantKillHitEffect : HitEffect
+    {
+        public override void DealtDamage(Vector2 damage, bool selfDamage, Player damagedPlayer = null)
+        {
+            if (damagedPlayer == null) return;
+            if (damagedPlayer.data.stats.remainingRespawns > 0)
+            {
+                damagedPlayer.data.view.RPC("RPCA_Die_Phoenix", RpcTarget.All, new object[]
+                {
+                    damage
+                });
+            }
+            else
+            {
+                damagedPlayer.data.view.RPC("RPCA_Die", RpcTarget.All, new object[]
+                {
+                    damage
+                });
+            }
+        }
+    }
+    public class Barret50CalMono : MonoBehaviour
+    {
+        private Player _player;
+
+        private void Awake()
+        {
+            if (_player == null) _player = gameObject.GetComponent<Player>();
+        }
+
+        private void Update()
+        {
+            var extendedMags = _player.data.stats.GetAdditionalData().extendedMags;
+            gameObject.GetComponent<Holding>().holdable.GetComponent<Gun>().GetComponentInChildren<GunAmmo>().maxAmmo =
+                extendedMags;
         }
     }
 }

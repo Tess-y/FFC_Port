@@ -1,4 +1,5 @@
 ﻿using ClassesManagerReborn.Util;
+using Ported_FFC.Extensions;
 using Ported_FFC.Utils;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Ported_FFC.Cards.Marksman
 
         protected override string GetDescription()
         {
-            return "Then only way to add ammo if you have Barret .50 Cal!";
+            return "The only way to add ammo if you have a Barret .50 Cal!";
         }
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers)
@@ -34,8 +35,8 @@ namespace Ported_FFC.Cards.Marksman
         }
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
-        {/// TODO: figure this shit out
-           // characterStats.GetAdditionalData().extendedMags += MaxAmmo;
+        {
+           characterStats.GetAdditionalData().extendedMags += MaxAmmo;
         }
 
         public override void OnRemoveCard()
@@ -45,7 +46,7 @@ namespace Ported_FFC.Cards.Marksman
         protected override CardInfoStat[] GetStats()
         {
             return new[] {
-                ManageCardInfoStats.BuildCardInfoStat("Reload Speed", true, null, $"+{MaxAmmo}"),
+                ManageCardInfoStats.BuildCardInfoStat("MaxAmmo", true, null, $"+{MaxAmmo}"),
                 ManageCardInfoStats.BuildCardInfoStat("Reload Speed", false, ReloadSpeed),
                 ManageCardInfoStats.BuildCardInfoStat("Movement Cooldown", false, MovementSpeed)
             };

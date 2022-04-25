@@ -11,6 +11,7 @@ namespace Ported_FFC.Cards.Jester
 {
     public class WayOfTheJester : CustomCard
     {
+        private WayOfTheJesterMono wayOfTheJesterMono;
         protected override string GetTitle()
         {
             return "Way of the Jester";
@@ -31,11 +32,12 @@ namespace Ported_FFC.Cards.Jester
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            player.gameObject.GetOrAddComponent<WayOfTheJesterMono>();
+            player.gameObject.AddComponent<WayOfTheJesterMono>();
         }
 
         public override void OnRemoveCard()
         {
+            Destroy(wayOfTheJesterMono);
         }
 
         protected override CardInfoStat[] GetStats()

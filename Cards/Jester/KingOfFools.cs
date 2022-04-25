@@ -33,10 +33,9 @@ namespace Ported_FFC.Cards.Jester
         }
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
-        {/// TODO: figure this shit out
-            UnityEngine.Debug.Log("adding KingOfFools");
-          characterStats.GetAdditionalData().kingOfFools++;
-            UnityEngine.Debug.Log(player.gameObject.GetOrAddComponent<KingOfFoolsHitSurfaceEffect>());
+        {
+           characterStats.GetAdditionalData().kingOfFools++;
+           player.gameObject.GetOrAddComponent<KingOfFoolsHitSurfaceEffect>();
         }
 
         public override void OnRemoveCard()
