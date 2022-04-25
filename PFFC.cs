@@ -11,7 +11,6 @@ namespace Ported_FFC
 {
 
     [BepInDependency("root.classes.manager.reborn")]
-    [BepInDependency("root.classes.manager.reborn")]
     [BepInPlugin(ModId, ModName, Version)]
     [BepInProcess("Rounds.exe")]
     public class PFFC : BaseUnityPlugin

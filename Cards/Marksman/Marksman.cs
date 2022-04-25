@@ -59,7 +59,7 @@ namespace Ported_FFC.Cards.Marksman
                 ManageCardInfoStats.BuildCardInfoStat("Projectile Speed", true, ProjectileSpeed),
                 ManageCardInfoStats.BuildCardInfoStat("Health", false, MaxHealth),
                 ManageCardInfoStats.BuildCardInfoStat("Attack Speed", false, AttackSpeed, "", "-"),
-                ManageCardInfoStats.BuildCardInfoStat("Reload Speed", false, ReloadSpeed),
+                ManageCardInfoStats.BuildCardInfoStat("Reload Time", false, ReloadSpeed),
                 ManageCardInfoStats.BuildCardInfoStat("Max Ammo", false, null, $"{MaxAmmo}")
             };
         }

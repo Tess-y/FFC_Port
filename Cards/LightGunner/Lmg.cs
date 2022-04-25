@@ -59,7 +59,7 @@ namespace Ported_FFC.Cards.LightGunner
                 ManageCardInfoStats.BuildCardInfoStat("Bullet Speed", true, ProjectileSpeed),
                 ManageCardInfoStats.BuildCardInfoStat("Max Ammo", true, null, $"+{MaxAmmo}"),
                 ManageCardInfoStats.BuildCardInfoStat("Attack Speed", false, AttackSpeed, "", "-"),
-                ManageCardInfoStats.BuildCardInfoStat("Reload Speed", false, ReloadSpeed),
+                ManageCardInfoStats.BuildCardInfoStat("Reload Time", false, ReloadSpeed),
                 ManageCardInfoStats.BuildCardInfoStat("Movement Speed", false, MovementSpeed)
             };
         }

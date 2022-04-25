@@ -57,7 +57,7 @@ namespace Ported_FFC.Cards.Marksman
             return new[] {
                 ManageCardInfoStats.BuildCardInfoStat("Insta Kill", true),
                 ManageCardInfoStats.BuildCardInfoStat("Max Ammo", false, null, $"{MaxAmmo}"),
-                ManageCardInfoStats.BuildCardInfoStat("Reload Speed", false, ReloadSpeed),
+                ManageCardInfoStats.BuildCardInfoStat("Reload Time", false, ReloadSpeed),
                 ManageCardInfoStats.BuildCardInfoStat("Movement Speed", false, MovementSpeed)
             };
         }

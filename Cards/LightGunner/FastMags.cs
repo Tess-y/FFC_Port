@@ -41,7 +41,7 @@ namespace Ported_FFC.Cards.LightGunner
         protected override CardInfoStat[] GetStats()
         {
             return new[] {
-                ManageCardInfoStats.BuildCardInfoStat("Reload Speed", true, ReloadSpeed)
+                ManageCardInfoStats.BuildCardInfoStat("Reload Time", true, ReloadSpeed)
             };
         }
 

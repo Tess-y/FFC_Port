@@ -49,7 +49,7 @@ namespace Ported_FFC.Cards.LightGunner
         {
             return new[] {
                 ManageCardInfoStats.BuildCardInfoStat("Damage", true, Damage),
-                ManageCardInfoStats.BuildCardInfoStat("Reload Speed", true, ReloadSpeed),
+                ManageCardInfoStats.BuildCardInfoStat("Reload Time", true, ReloadSpeed),
                 ManageCardInfoStats.BuildCardInfoStat("Attack Speed", true, AttackSpeed),
                 ManageCardInfoStats.BuildCardInfoStat("Health", false, MaxHealth)
             };

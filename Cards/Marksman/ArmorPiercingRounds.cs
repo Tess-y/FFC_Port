@@ -45,7 +45,7 @@ namespace Ported_FFC.Cards.Marksman
         {
             return new[] {
                 ManageCardInfoStats.BuildCardInfoStat("Unblockable", true),
-                ManageCardInfoStats.BuildCardInfoStat("Reload Speed", false, ReloadSpeed)
+                ManageCardInfoStats.BuildCardInfoStat("Reload Time", false, ReloadSpeed)
             };
         }
 
