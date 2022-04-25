@@ -11,11 +11,13 @@ using System.Collections;
 using UnboundLib.Networking;
 using System.Linq;
 using HarmonyLib;
+using UnboundLib.GameModes;
 
 namespace Ported_FFC.Cards.Juggernaut
 {
     public class ArmorPlating : CustomCard
     {
+        ArmorPlatingMono armorPlatingMono;
         private const float MaxHealth = 1.30f;
         private const float ChanceToReflect = 1.10f;
 
@@ -35,15 +37,17 @@ namespace Ported_FFC.Cards.Juggernaut
 
             cardInfo.allowMultiple = false;
 
-            gameObject.GetOrAddComponent<ClassNameMono>().name = JuggernautClass.name;
+            gameObject.GetOrAddComponent<ClassNameMono>().className = JuggernautClass.name;
         }
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
+            armorPlatingMono = player.gameObject.GetOrAddComponent<ArmorPlatingMono>();
         }
 
         public override void OnRemoveCard()
         {
+            Destroy(armorPlatingMono);
         }
 
         protected override CardInfoStat[] GetStats()
@@ -79,6 +83,12 @@ namespace Ported_FFC.Cards.Juggernaut
     {
         public List<bool> reflect_rolls;
         public int indx;
+
+        public void Start()
+        {
+            GameModeManager.AddHook(GameModeHooks.HookPointStart, (gm) => SyncOdds(this.GetComponent<Player>().playerID));
+        }
+
         public IEnumerator SyncOdds(int playerID)
         {
             if (!PhotonNetwork.IsMasterClient) yield break;
@@ -105,6 +115,7 @@ namespace Ported_FFC.Cards.Juggernaut
             }
             catch { return false; }
         }
+
     }
 
 

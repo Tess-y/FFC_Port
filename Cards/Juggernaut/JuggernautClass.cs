@@ -19,7 +19,7 @@ namespace Ported_FFC.Cards.Juggernaut
             while (classCard == null) yield return null;
             CustomCard.BuildCard<Conditioning>((card) => ClassesRegistry.Regester(card, CardType.Card, classCard));
             CustomCard.BuildCard<SizeMatters>((card) => ClassesRegistry.Regester(card, CardType.Card, classCard));
-            //CustomCard.BuildCard<ArmorPlating>((card) => ClassesRegistry.Regester(card, CardType.Card, classCard)); //doesn't do anything yet (was never finished in original FFC)
+            CustomCard.BuildCard<ArmorPlating>((card) => ClassesRegistry.Regester(card, CardType.Card, classCard)); //doesn't do anything yet (was never finished in original FFC)
         }
     }
 }
