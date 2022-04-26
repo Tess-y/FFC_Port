@@ -14,14 +14,12 @@ namespace Ported_FFC.Cards.Marksman
         public override IEnumerator Init()
         {
             UnityEngine.Debug.Log("Regestering: " + name);
-            CardInfo classCard = null;
-            CustomCard.BuildCard<Marksman>((card) => { ClassesRegistry.Regester(card, CardType.Entry); classCard = card; });
-            while (classCard == null) yield return null;
-            CustomCard.BuildCard<ArmorPiercingRounds>((card) => ClassesRegistry.Regester(card, CardType.Card, classCard));
-            CardInfo barret50Cal = null;
-            CustomCard.BuildCard<Barret50Cal>((card) => { ClassesRegistry.Regester(card, CardType.Branch, classCard); barret50Cal = card; });
-            while (barret50Cal == null) yield return null;
-            CustomCard.BuildCard<SniperRifleExtendedMag>((card) => ClassesRegistry.Regester(card, CardType.Card, barret50Cal));
+
+            while (!(Marksman.Card && ArmorPiercingRounds.Card && Barret50Cal.Card && SniperRifleExtendedMag.Card)) yield return null;
+            ClassesRegistry.Register(Marksman.Card, CardType.Entry);
+            ClassesRegistry.Register(ArmorPiercingRounds.Card, CardType.Card, Marksman.Card);
+            ClassesRegistry.Register(Barret50Cal.Card, CardType.Branch, Marksman.Card);
+            ClassesRegistry.Register(SniperRifleExtendedMag.Card, CardType.Card, Barret50Cal.Card);
 
         }
     }

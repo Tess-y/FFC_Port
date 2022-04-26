@@ -17,6 +17,7 @@ namespace Ported_FFC.Cards.LightGunner
         private const float ProjectileSpeed = 1.10f;
         private const int MaxAmmo = 3;
 
+        internal static CardInfo Card = null;
         protected override string GetTitle()
         {
             return "Assault Rifle";

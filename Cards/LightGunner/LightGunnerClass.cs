@@ -15,24 +15,20 @@ namespace Ported_FFC.Cards.LightGunner
         public override IEnumerator Init()
         {
             UnityEngine.Debug.Log("Regestering: " + name);
-            CardInfo classCard = null;
-            CustomCard.BuildCard<LightGunner>((card) => { ClassesRegistry.Regester(card, CardType.Entry); classCard = card; });
-            while (classCard == null) yield return null;
-            CustomCard.BuildCard<FastMags>((card) => ClassesRegistry.Regester(card, CardType.Card, classCard));
-            CustomCard.BuildCard<BattleExperience>((card) => ClassesRegistry.Regester(card, CardType.Card, classCard));
-            CustomCard.BuildCard<Lmg>((card) => ClassesRegistry.Regester(card, CardType.Card, classCard));
-            CustomCard.BuildCard<Dmr>((card) => ClassesRegistry.Regester(card, CardType.Card, classCard));
-            CustomCard.BuildCard<AssaultRifle>((card) => ClassesRegistry.Regester(card, CardType.Card, classCard));
+            while (!(LightGunner.Card && FastMags.Card && BattleExperience.Card && Lmg.Card && Dmr.Card && AssaultRifle.Card)) yield return null;
+            ClassesRegistry.Register(LightGunner.Card, CardType.Entry);
+            ClassesRegistry.Register(FastMags.Card, CardType.Card, LightGunner.Card);
+            ClassesRegistry.Register(BattleExperience.Card, CardType.Card, LightGunner.Card);
+            ClassesRegistry.Register(Lmg.Card, CardType.Card, LightGunner.Card);
+            ClassesRegistry.Register(Dmr.Card, CardType.Card, LightGunner.Card);
+            ClassesRegistry.Register(AssaultRifle.Card, CardType.Card, LightGunner.Card);
         }
 
         public override IEnumerator PostInit()
         {
-            CardInfo lmg = ModdingUtils.Utils.Cards.instance.GetCardWithName("LMG");
-            CardInfo dmr = ModdingUtils.Utils.Cards.instance.GetCardWithName("DMR");
-            CardInfo assaultRifle = ModdingUtils.Utils.Cards.instance.GetCardWithName("Assault Rifle");
-            ClassesRegistry.Get(lmg).Blacklist(dmr).Blacklist(assaultRifle);
-            ClassesRegistry.Get(dmr).Blacklist(lmg).Blacklist(assaultRifle);
-            ClassesRegistry.Get(assaultRifle).Blacklist(dmr).Blacklist(lmg);
+            ClassesRegistry.Get(Lmg.Card).Blacklist(Dmr.Card).Blacklist(AssaultRifle.Card);
+            ClassesRegistry.Get(Dmr.Card).Blacklist(Lmg.Card).Blacklist(AssaultRifle.Card);
+            ClassesRegistry.Get(AssaultRifle.Card).Blacklist(Dmr.Card).Blacklist(Lmg.Card);
             yield break;
         }
     }

@@ -18,6 +18,7 @@ namespace Ported_FFC.Cards.Marksman
         private const float ReloadSpeed = 1.20f;
         private const int MaxAmmo = -1;
 
+        internal static CardInfo Card = null;
         protected override string GetTitle()
         {
             return "Marksman";

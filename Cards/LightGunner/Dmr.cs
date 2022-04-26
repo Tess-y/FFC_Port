@@ -18,6 +18,7 @@ namespace Ported_FFC.Cards.LightGunner
         private const float AttackSpeed = 2.00f;
         private const float ReloadSpeed = 1.20f;
 
+        internal static CardInfo Card = null;
         protected override string GetTitle()
         {
             return "DMR";

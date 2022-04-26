@@ -14,6 +14,7 @@ namespace Ported_FFC.Cards.Juggernaut
         private const float MaxHealth = 1.50f;
         private const float MovementSpeed = 1.15f;
 
+        internal static CardInfo Card = null;
         protected override string GetTitle()
         {
             return "Conditioning";

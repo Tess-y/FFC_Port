@@ -13,6 +13,7 @@ namespace Ported_FFC.Cards.Marksman
     {
         private const float ReloadSpeed = 1.25f;
 
+        internal static CardInfo Card = null;
         protected override string GetTitle()
         {
             return "Armor-Piercing Rounds";

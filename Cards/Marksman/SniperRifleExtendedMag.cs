@@ -16,6 +16,7 @@ namespace Ported_FFC.Cards.Marksman
         private const float MovementSpeed = 0.95f;
         private const int MaxAmmo = 1;
 
+        internal static CardInfo Card = null;
         protected override string GetTitle()
         {
             return "Sniper Rifle Extended Mag";

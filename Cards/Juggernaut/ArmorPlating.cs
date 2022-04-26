@@ -21,6 +21,7 @@ namespace Ported_FFC.Cards.Juggernaut
         private const float MaxHealth = 1.30f;
         private const float ChanceToReflect = 1.10f;
 
+        internal static CardInfo Card = null;
         protected override string GetTitle()
         {
             return "Armor Plating";

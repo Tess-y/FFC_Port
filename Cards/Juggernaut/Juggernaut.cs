@@ -16,6 +16,7 @@ namespace Ported_FFC.Cards.Juggernaut
         private const float JumpHight = 0.75f;
         private const float Size = 1.30f;
 
+        internal static CardInfo Card = null;
         protected override string GetTitle()
         {
             return "Juggernaut";

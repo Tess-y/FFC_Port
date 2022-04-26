@@ -14,12 +14,11 @@ namespace Ported_FFC.Cards.Juggernaut
         public override IEnumerator Init()
         {
             UnityEngine.Debug.Log("Regestering: " + name);
-            CardInfo classCard = null;
-            CustomCard.BuildCard<Juggernaut>((card) => { ClassesRegistry.Regester(card, CardType.Entry); classCard = card; });
-            while (classCard == null) yield return null;
-            CustomCard.BuildCard<Conditioning>((card) => ClassesRegistry.Regester(card, CardType.Card, classCard));
-            CustomCard.BuildCard<SizeMatters>((card) => ClassesRegistry.Regester(card, CardType.Card, classCard));
-            CustomCard.BuildCard<ArmorPlating>((card) => ClassesRegistry.Regester(card, CardType.Card, classCard)); //doesn't do anything yet (was never finished in original FFC)
+            while (!(Juggernaut.Card && Conditioning.Card && SizeMatters.Card && ArmorPlating.Card)) yield return null;
+            ClassesRegistry.Register(Juggernaut.Card, CardType.Entry);
+            ClassesRegistry.Register(Conditioning.Card, CardType.Card, Juggernaut.Card);
+            ClassesRegistry.Register(SizeMatters.Card, CardType.Card, Juggernaut.Card);
+            ClassesRegistry.Register(ArmorPlating.Card, CardType.Card, Juggernaut.Card);
         }
     }
 }

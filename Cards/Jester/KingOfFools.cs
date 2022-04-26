@@ -16,6 +16,7 @@ namespace Ported_FFC.Cards.Jester
 {
     public class KingOfFools : CustomCard
     {
+        internal static CardInfo Card = null;
         protected override string GetTitle()
         {
             return "King Of Fools";

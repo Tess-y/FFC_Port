@@ -17,6 +17,7 @@ namespace Ported_FFC.Cards.LightGunner
         private const float AttackSpeed = 0.90f;
         private const float MaxHealth = 0.90f;
 
+        internal static CardInfo Card = null;
         protected override string GetTitle()
         {
             return "Battle Experience";

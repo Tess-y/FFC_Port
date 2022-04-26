@@ -21,6 +21,7 @@ namespace Ported_FFC.Cards.Jester
     {
         private const int Bounces = 3;
 
+        internal static CardInfo Card = null;
         protected override string GetTitle()
         {
             return "Jokes on you!";

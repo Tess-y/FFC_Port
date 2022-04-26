@@ -19,6 +19,7 @@ namespace Ported_FFC.Cards.Juggernaut
         private const float MaxAdaptiveMovementSpeed = 0.35f;
         private const float MaxAdaptiveGravity = 0.25f;
 
+        internal static CardInfo Card = null;
         protected override string GetTitle()
         {
             return "Size Matters";

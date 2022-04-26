@@ -20,6 +20,7 @@ namespace Ported_FFC.Cards.Marksman
         private InstantKillHitEffect instantKillHitEffect;
         private Barret50CalMono barret50CalMono;
 
+        internal static CardInfo Card = null;
         protected override string GetTitle()
         {
             return "Barret .50 Cal";

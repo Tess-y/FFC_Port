@@ -14,12 +14,11 @@ namespace Ported_FFC.Cards.Jester
         public override IEnumerator Init()
         {
             UnityEngine.Debug.Log("Regestering: "+name);
-            CardInfo classCard = null;
-            CustomCard.BuildCard<Jester>((card) => { ClassesRegistry.Regester(card, CardType.Entry); classCard = card; });
-            while (classCard == null) yield return null;
-            CustomCard.BuildCard<JokesOnYou>((card) => ClassesRegistry.Regester(card, CardType.Card, classCard));
-            CustomCard.BuildCard<WayOfTheJester>((card) => ClassesRegistry.Regester(card, CardType.Card, classCard));
-            CustomCard.BuildCard<KingOfFools>((card) => ClassesRegistry.Regester(card, CardType.Card, classCard, 2));
+            while(!(Jester.Card && JokesOnYou.Card && KingOfFools.Card && WayOfTheJester.Card)) yield return null;
+            ClassesRegistry.Register(Jester.Card, CardType.Entry);
+            ClassesRegistry.Register(JokesOnYou.Card, CardType.Card, Jester.Card);
+            ClassesRegistry.Register(KingOfFools.Card, CardType.Card, Jester.Card, 2);
+            ClassesRegistry.Register(WayOfTheJester.Card, CardType.Card, Jester.Card);
         }
     }
 }

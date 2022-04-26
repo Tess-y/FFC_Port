@@ -12,6 +12,7 @@ namespace Ported_FFC.Cards.Jester
     public class WayOfTheJester : CustomCard
     {
         private WayOfTheJesterMono wayOfTheJesterMono;
+        internal static CardInfo Card = null;
         protected override string GetTitle()
         {
             return "Way of the Jester";

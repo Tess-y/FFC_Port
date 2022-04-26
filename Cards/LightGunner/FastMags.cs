@@ -13,6 +13,7 @@ namespace Ported_FFC.Cards.LightGunner
     {
         private const float ReloadSpeed = 0.70f;
 
+        internal static CardInfo Card = null;
         protected override string GetTitle()
         {
             return "Fast Mags";

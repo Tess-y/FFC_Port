@@ -18,6 +18,7 @@ namespace Ported_FFC.Cards.LightGunner
         private const float MovementSpeed = 0.70f;
         private const int MaxAmmo = 12;
 
+        internal static CardInfo Card = null;
         protected override string GetTitle()
         {
             return "LMG";
