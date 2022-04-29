@@ -39,8 +39,9 @@ namespace Ported_FFC.Cards.Jester
            player.gameObject.GetOrAddComponent<KingOfFoolsHitSurfaceEffect>();
         }
 
-        public override void OnRemoveCard()
+        public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
+            Destroy(player.gameObject.GetOrAddComponent<KingOfFoolsHitSurfaceEffect>());
         }
 
         protected override CardInfoStat[] GetStats()

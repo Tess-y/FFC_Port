@@ -17,8 +17,6 @@ namespace Ported_FFC.Cards.Marksman
         private const float ReloadSpeed = 1.40f;
         private const float MovementSpeed = 0.90f;
         private const int MaxAmmo = 1;
-        private InstantKillHitEffect instantKillHitEffect;
-        private Barret50CalMono barret50CalMono;
 
         internal static CardInfo Card = null;
         protected override string GetTitle()
@@ -43,14 +41,14 @@ namespace Ported_FFC.Cards.Marksman
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            instantKillHitEffect = player.gameObject.GetOrAddComponent<InstantKillHitEffect>();
-            barret50CalMono = player.gameObject.GetOrAddComponent<Barret50CalMono>();
+            player.gameObject.GetOrAddComponent<InstantKillHitEffect>();
+            player.gameObject.GetOrAddComponent<Barret50CalMono>();
         }
 
-        public override void OnRemoveCard()
+        public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            Destroy(instantKillHitEffect);
-            Destroy(barret50CalMono);
+            Destroy(player.gameObject.GetOrAddComponent<InstantKillHitEffect>());
+            Destroy(player.gameObject.GetOrAddComponent<Barret50CalMono>());
         }
 
         protected override CardInfoStat[] GetStats()

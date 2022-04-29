@@ -46,8 +46,9 @@ namespace Ported_FFC.Cards.Juggernaut
             player.gameObject.GetOrAddComponent<SizeMattersMono>();
         }
 
-        public override void OnRemoveCard()
+        public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
+            Destroy(player.gameObject.GetOrAddComponent<SizeMatters>());
         }
 
         protected override CardInfoStat[] GetStats()

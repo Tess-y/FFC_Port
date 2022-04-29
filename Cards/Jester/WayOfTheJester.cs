@@ -11,7 +11,6 @@ namespace Ported_FFC.Cards.Jester
 {
     public class WayOfTheJester : CustomCard
     {
-        private WayOfTheJesterMono wayOfTheJesterMono;
         internal static CardInfo Card = null;
         protected override string GetTitle()
         {
@@ -33,12 +32,12 @@ namespace Ported_FFC.Cards.Jester
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            player.gameObject.AddComponent<WayOfTheJesterMono>();
+            player.gameObject.GetOrAddComponent<WayOfTheJesterMono>();
         }
 
-        public override void OnRemoveCard()
+        public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            Destroy(wayOfTheJesterMono);
+            Destroy(player.gameObject.GetOrAddComponent<WayOfTheJesterMono>());
         }
 
         protected override CardInfoStat[] GetStats()
@@ -109,9 +108,9 @@ namespace Ported_FFC.Cards.Jester
             if (_player == null) return;
             _stats = _player.data.stats;
             _gun = _player.GetComponent<Holding>().holdable.GetComponent<Gun>();
-            _bounces = _gun.reflects;
-            if (Mathf.Clamp(_bounces, 0, 25) == _previousBounces) return;
-            _previousBounces = Mathf.Clamp(_bounces,0,25);
+            _bounces = Mathf.Clamp(_gun.reflects, 0, 25);
+            if (_bounces == _previousBounces) return;
+            _previousBounces = _bounces;
 
             _stats.movementSpeed -= deltaMovementSpeed;
             _gun.damage -= deltaDamage;

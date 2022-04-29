@@ -17,7 +17,6 @@ namespace Ported_FFC.Cards.Juggernaut
 {
     public class ArmorPlating : CustomCard
     {
-        ArmorPlatingMono armorPlatingMono;
         private const float MaxHealth = 1.30f;
         private const float ChanceToReflect = 1.10f;
 
@@ -43,12 +42,12 @@ namespace Ported_FFC.Cards.Juggernaut
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            armorPlatingMono = player.gameObject.GetOrAddComponent<ArmorPlatingMono>();
+            player.gameObject.GetOrAddComponent<ArmorPlatingMono>();
         }
 
-        public override void OnRemoveCard()
+        public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            Destroy(armorPlatingMono);
+            Destroy(player.gameObject.GetOrAddComponent<ArmorPlatingMono>());
         }
 
         protected override CardInfoStat[] GetStats()
