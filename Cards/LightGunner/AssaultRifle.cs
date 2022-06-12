@@ -39,6 +39,9 @@ namespace Ported_FFC.Cards.LightGunner
 
             cardInfo.allowMultiple = false;
 
+        }
+        public override void Callback()
+        {
             gameObject.GetOrAddComponent<ClassNameMono>().className = LightGunnerClass.name;
         }
 

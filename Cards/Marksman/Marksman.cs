@@ -40,7 +40,9 @@ namespace Ported_FFC.Cards.Marksman
             statModifiers.health = MaxHealth;
 
             cardInfo.allowMultiple = false;
-
+        }
+        public override void Callback()
+        {
             gameObject.GetOrAddComponent<ClassNameMono>();
         }
 
@@ -67,7 +69,7 @@ namespace Ported_FFC.Cards.Marksman
 
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Common;
+            return CardInfo.Rarity.Uncommon;
         }
 
         protected override CardThemeColor.CardThemeColorType GetTheme()

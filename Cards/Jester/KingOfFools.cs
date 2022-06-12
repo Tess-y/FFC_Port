@@ -1,5 +1,6 @@
 ﻿using ClassesManagerReborn.Util;
 using ModdingUtils.RoundsEffects;
+using Photon.Pun;
 using Ported_FFC.Extensions;
 using Ported_FFC.Utils;
 using System;
@@ -28,7 +29,7 @@ namespace Ported_FFC.Cards.Jester
                 "You have become the King of Fools! You know have a 15% chance for bullet bounces to spawn an extra bullet!";
         }
 
-        public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers)
+        public override void Callback()
         {
             gameObject.GetOrAddComponent<ClassNameMono>().className = JesterClass.name;
         }
@@ -77,12 +78,11 @@ namespace Ported_FFC.Cards.Jester
         private const int BaseChance = 15;
         public override void Hit(Vector2 position, Vector2 normal, Vector2 velocity)
         {
-            UnityEngine.Debug.Log("King_Hit");
             Player player = gameObject.GetComponent<Player>();
             var multiplier = player.data.stats.GetAdditionalData().kingOfFools;
             var role = _rng.Next(1, 101);
 
-            if (multiplier == 0 || role > multiplier * BaseChance || !player.data.view.IsMine) return;
+            if (multiplier == 0 || role > multiplier * BaseChance || !PhotonNetwork.IsMasterClient) return;
             NetworkingManager.RPC(typeof(KingOfFoolsHitSurfaceEffect), nameof(DoKingOfFoolsRPC), position, normal, velocity, player.playerID);
         }
 

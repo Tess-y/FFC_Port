@@ -31,6 +31,9 @@ namespace Ported_FFC.Cards.Marksman
 
             cardInfo.allowMultiple = false;
 
+        }
+        public override void Callback()
+        {
             gameObject.GetOrAddComponent<ClassNameMono>().className = MarksmanClass.name;
         }
 

@@ -29,10 +29,12 @@ namespace Ported_FFC.Cards.Juggernaut
         {
             statModifiers.health = MaxHealth;
             statModifiers.movementSpeed = MovementSpeed;
-
-            gameObject.GetOrAddComponent<ClassNameMono>().className = JuggernautClass.name;
         }
 
+        public override void Callback()
+        {
+            gameObject.GetOrAddComponent<ClassNameMono>().className = JuggernautClass.name;
+        }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
         }

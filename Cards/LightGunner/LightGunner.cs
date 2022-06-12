@@ -33,9 +33,12 @@ namespace Ported_FFC.Cards.LightGunner
             statModifiers.movementSpeed = MovementSpeed;
 
             cardInfo.allowMultiple = false;
-            gameObject.GetOrAddComponent<ClassNameMono>();
         }
 
+        public override void Callback()
+        {
+            gameObject.GetOrAddComponent<ClassNameMono>();
+        }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
         }

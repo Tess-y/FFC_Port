@@ -27,10 +27,12 @@ namespace Ported_FFC.Cards.LightGunner
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers)
         {
             gun.reloadTime = ReloadSpeed;
-
-            gameObject.GetOrAddComponent<ClassNameMono>().className = LightGunnerClass.name;
         }
 
+        public override void Callback()
+        {
+            gameObject.GetOrAddComponent<ClassNameMono>().className = LightGunnerClass.name;
+        }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
         }

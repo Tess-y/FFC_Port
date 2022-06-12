@@ -20,16 +20,19 @@ namespace Ported_FFC.Cards.Jester
         protected override string GetDescription()
         {
             return
-                "PASSIVE: Your stats increase as your pick cards that give you more bounces. Stats are added per bounce. Capped at 25 bounces. Thanks Pong! ;)";
+                "PASSIVE: Your stats increase as your pick cards that give you more bounces. Stats are added per bounce. Capped at 5 bounces per card. Thanks Pong! ;)";
         }
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers)
         {
             cardInfo.allowMultiple = false;
 
-            gameObject.GetOrAddComponent<ClassNameMono>().className = JesterClass.name;
         }
 
+        public override void Callback()
+        {
+            gameObject.GetOrAddComponent<ClassNameMono>().className = JesterClass.name;
+        }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             player.gameObject.GetOrAddComponent<WayOfTheJesterMono>();
@@ -108,7 +111,8 @@ namespace Ported_FFC.Cards.Jester
             if (_player == null) return;
             _stats = _player.data.stats;
             _gun = _player.GetComponent<Holding>().holdable.GetComponent<Gun>();
-            _bounces = Mathf.Clamp(_gun.reflects, 0, 25);
+            var bounce_cap = 5 * _player.data.currentCards.Count;
+            _bounces = Mathf.Clamp(_gun.reflects, 0, bounce_cap);
             if (_bounces == _previousBounces) return;
             _previousBounces = _bounces;
 

@@ -18,7 +18,8 @@ namespace Ported_FFC.Cards.Juggernaut
     public class ArmorPlating : CustomCard
     {
         private const float MaxHealth = 1.30f;
-        private const float ChanceToReflect = 1.10f;
+        private const float ChanceToReflect = 1.25f;
+        private const float MovementSpeed = 1.25f;
 
         internal static CardInfo Card = null;
         protected override string GetTitle()
@@ -37,9 +38,12 @@ namespace Ported_FFC.Cards.Juggernaut
 
             cardInfo.allowMultiple = false;
 
-            gameObject.GetOrAddComponent<ClassNameMono>().className = JuggernautClass.name;
         }
 
+        public override void Callback()
+        {
+            gameObject.GetOrAddComponent<ClassNameMono>().className = JuggernautClass.name;
+        }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             player.gameObject.GetOrAddComponent<ArmorPlatingMono>();
@@ -54,7 +58,8 @@ namespace Ported_FFC.Cards.Juggernaut
         {
             return new[] {
                 ManageCardInfoStats.BuildCardInfoStat("Health", true, MaxHealth),
-                ManageCardInfoStats.BuildCardInfoStat("Chance to reflect", true, ChanceToReflect)
+                ManageCardInfoStats.BuildCardInfoStat("Chance to reflect", true, ChanceToReflect),
+                ManageCardInfoStats.BuildCardInfoStat("Movement speed", false, MovementSpeed)
             };
         }
 
@@ -92,8 +97,8 @@ namespace Ported_FFC.Cards.Juggernaut
         public IEnumerator SyncOdds(int playerID)
         {
             if (!PhotonNetwork.IsMasterClient) yield break;
-            bool[] bools = new bool[1000];
-            for (int i = 0; i < 1000; ++i) bools[i] = UnityEngine.Random.Range(0,10) == 0? true : false;
+            bool[] bools = new bool[10000];
+            for (int i = 0; i < 10000; ++i) bools[i] = UnityEngine.Random.Range(0,4) == 0? true : false;
             NetworkingManager.RPC(typeof(ArmorPlatingMono), nameof(OddsRPCA), playerID, bools);
             yield break;
         }

@@ -7,6 +7,7 @@ using Ported_FFC.Cards.Juggernaut;
 using Ported_FFC.Cards.LightGunner;
 using Ported_FFC.Cards.Marksman;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -22,7 +23,7 @@ namespace Ported_FFC
     {
         private const string ModId = "root.port.fluxxfield.fluxxfieldscards";
         private const string ModName = "Port of FFC";
-        private const string Version = "1.0.4";
+        private const string Version = "1.1.0";
         public const string ModInitials = "PFFC";
         public static PFFC instance { get; private set; }
 
@@ -39,6 +40,7 @@ namespace Ported_FFC
             CustomCard.BuildCard<JokesOnYou>((card) => JokesOnYou.Card = card);
             CustomCard.BuildCard<KingOfFools>((card) => KingOfFools.Card = card);
             CustomCard.BuildCard<WayOfTheJester>((card) => WayOfTheJester.Card = card);
+            CustomCard.BuildCard<WildCard>((card) => WildCard.Card = card);
 
 
             CustomCard.BuildCard<Juggernaut>((card) => Juggernaut.Card = card);

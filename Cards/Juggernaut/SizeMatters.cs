@@ -34,6 +34,9 @@ namespace Ported_FFC.Cards.Juggernaut
         {
             statModifiers.health = MaxHealth;
 
+        }
+        public override void Callback()
+        {
             gameObject.GetOrAddComponent<ClassNameMono>().className = JuggernautClass.name;
         }
 
@@ -104,7 +107,7 @@ namespace Ported_FFC.Cards.Juggernaut
 
             movementSpeedDelta = _player.data.stats.movementSpeed * (_player.data.stats.GetAdditionalData().adaptiveMovementSpeed - (_player.data.stats.GetAdditionalData().adaptiveMovementSpeed * healthPrecent));
             gravtyDelta = -_player.data.stats.gravity * (_player.data.stats.GetAdditionalData().adaptiveGravity - (_player.data.stats.GetAdditionalData().adaptiveGravity * healthPrecent));
-            sizeDelta = (_player.data.stats.sizeMultiplier * Mathf.Clamp(healthPrecent,0.25f,1f)) - _player.data.stats.sizeMultiplier;
+            sizeDelta = (_player.data.stats.sizeMultiplier * (Mathf.Clamp(healthPrecent,0f,1f)/2 + 0.5f)) - _player.data.stats.sizeMultiplier;
 
 
             _player.data.stats.movementSpeed += movementSpeedDelta;

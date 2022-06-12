@@ -36,9 +36,12 @@ namespace Ported_FFC.Cards.Marksman
 
             cardInfo.allowMultiple = false;
 
-            gameObject.GetOrAddComponent<ClassNameMono>().className = MarksmanClass.name;
         }
 
+        public override void Callback()
+        {
+            gameObject.GetOrAddComponent<ClassNameMono>().className = MarksmanClass.name;
+        }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             player.gameObject.GetOrAddComponent<InstantKillHitEffect>();

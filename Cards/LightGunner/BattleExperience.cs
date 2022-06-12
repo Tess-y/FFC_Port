@@ -35,6 +35,9 @@ namespace Ported_FFC.Cards.LightGunner
             gun.reloadTime = ReloadSpeed;
             statModifiers.health = MaxHealth;
 
+        }
+        public override void Callback()
+        {
             gameObject.GetOrAddComponent<ClassNameMono>().className = LightGunnerClass.name;
         }
 

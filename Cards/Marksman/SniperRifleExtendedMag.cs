@@ -32,9 +32,12 @@ namespace Ported_FFC.Cards.Marksman
             gun.reloadTime = ReloadSpeed;
             statModifiers.movementSpeed = MovementSpeed;
 
-            gameObject.GetOrAddComponent<ClassNameMono>().className = MarksmanClass.name;
         }
 
+        public override void Callback()
+        {
+            gameObject.GetOrAddComponent<ClassNameMono>().className = MarksmanClass.name;
+        }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
            characterStats.GetAdditionalData().extendedMags += MaxAmmo;

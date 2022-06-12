@@ -29,7 +29,7 @@ namespace Ported_FFC.Cards.Jester
 
         protected override string GetDescription()
         {
-            return "Your bouncing bullets bounce right off you!";
+            return "Your bouncing bullets bounce right off you! <i>(and friends)</i>";
         }
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers)
@@ -38,9 +38,12 @@ namespace Ported_FFC.Cards.Jester
 
             cardInfo.allowMultiple = false;
 
-            gameObject.GetOrAddComponent<ClassNameMono>().className = JesterClass.name;
         }
 
+        public override void Callback()
+        {
+            gameObject.GetOrAddComponent<ClassNameMono>().className = JesterClass.name;
+        }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             characterStats.GetAdditionalData().JokesOnYou = true;
@@ -94,7 +97,7 @@ namespace Ported_FFC.Cards.Jester
             {
                 Player hitPlayer = healthHandler.GetComponent<Player>();
                 // if the hit player is not null
-                if (hitPlayer != null && __instance.ownPlayer.playerID == hitPlayer.playerID && __instance.ownPlayer.data.stats.GetAdditionalData().JokesOnYou)
+                if (hitPlayer != null && __instance.ownPlayer.teamID == hitPlayer.teamID && __instance.ownPlayer.data.stats.GetAdditionalData().JokesOnYou)
                 {
                     __instance.GetComponent<ProjectileHit>().RemoveOwnPlayerFromPlayersHit();
                     __instance.GetComponent<ProjectileHit>().AddPlayerToHeld(healthHandler);

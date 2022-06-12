@@ -41,8 +41,10 @@ namespace Ported_FFC.Cards.LightGunner
 
             cardInfo.allowMultiple = false;
 
-
-            gameObject.GetOrAddComponent<ClassNameMono>().className = LightGunnerClass.name; ;
+        }
+        public override void Callback()
+        {
+            gameObject.GetOrAddComponent<ClassNameMono>().className = LightGunnerClass.name;
         }
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)

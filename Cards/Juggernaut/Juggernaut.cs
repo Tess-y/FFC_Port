@@ -11,10 +11,10 @@ namespace Ported_FFC.Cards.Juggernaut
 {
     public class Juggernaut : CustomCard
     {
-        private const float MaxHealth = 3.50f;
+        private const float MaxHealth = 3f;
         private const float MovementSpeed = 0.65f;
         private const float JumpHight = 0.75f;
-        private const float Size = 1.30f;
+        private const float Size = 1.60f;
 
         internal static CardInfo Card = null;
         protected override string GetTitle()
@@ -36,9 +36,12 @@ namespace Ported_FFC.Cards.Juggernaut
 
             cardInfo.allowMultiple = false;
 
-            gameObject.GetOrAddComponent<ClassNameMono>();
         }
 
+        public override void Callback()
+        {
+            gameObject.GetOrAddComponent<ClassNameMono>();
+        }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
         }
@@ -58,7 +61,7 @@ namespace Ported_FFC.Cards.Juggernaut
 
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Common;
+            return CardInfo.Rarity.Rare;
         }
 
         protected override CardThemeColor.CardThemeColorType GetTheme()
