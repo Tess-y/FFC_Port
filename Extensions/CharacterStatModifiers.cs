@@ -14,6 +14,7 @@ namespace Ported_FFC.Extensions
         public bool isBloodMage;
         public float adaptiveMovementSpeed;
         public float adaptiveGravity;
+        public float healing;
         public int extendedMags;
         public int kingOfFools;
         public int healthCost;
@@ -25,6 +26,7 @@ namespace Ported_FFC.Extensions
             isBloodMage = false;
             adaptiveMovementSpeed = 0f;
             adaptiveGravity = 0f;
+            healing = 1;
             extendedMags = 1;
             kingOfFools = 0;
             healthCost = 0;
@@ -65,6 +67,7 @@ namespace Ported_FFC.Extensions
                 additionalData.adaptiveMovementSpeed = 0f;
                 additionalData.adaptiveGravity = 0f;
                 additionalData.hasAdaptiveSizing = false;
+                additionalData.healing = 1;
                 additionalData.extendedMags = 1;
                 additionalData.kingOfFools = 0;
                 additionalData.isBloodMage = false;

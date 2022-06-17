@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnboundLib.Cards;
+using UnityEngine;
 
 namespace Ported_FFC
 {
@@ -23,8 +24,9 @@ namespace Ported_FFC
     {
         private const string ModId = "root.port.fluxxfield.fluxxfieldscards";
         private const string ModName = "Port of FFC";
-        private const string Version = "1.1.0";
+        private const string Version = "1.1.3";
         public const string ModInitials = "PFFC";
+        internal static AssetBundle RS_Assets;
         public static PFFC instance { get; private set; }
 
         private void Awake() 
@@ -36,6 +38,8 @@ namespace Ported_FFC
         private void Start()
         {
             instance = this;
+
+            RS_Assets = Jotunn.Utils.AssetUtils.LoadAssetBundleFromResources("rspffc", typeof(PFFC).Assembly);
             CustomCard.BuildCard<Jester>((card) => Jester.Card = card);
             CustomCard.BuildCard<JokesOnYou>((card) => JokesOnYou.Card = card);
             CustomCard.BuildCard<KingOfFools>((card) => KingOfFools.Card = card);

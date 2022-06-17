@@ -67,7 +67,7 @@ namespace Ported_FFC.Cards.LightGunner
 
         protected override GameObject GetCardArt()
         {
-            return null;
+            return PFFC.RS_Assets.LoadAsset<GameObject>("C_LIGHTGUNNER");
         }
 
         public override string GetModName()

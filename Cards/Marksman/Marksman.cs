@@ -79,7 +79,7 @@ namespace Ported_FFC.Cards.Marksman
 
         protected override GameObject GetCardArt()
         {
-            return null;
+            return PFFC.RS_Assets.LoadAsset<GameObject>("C_MARKSMAN");
         }
 
         public override string GetModName()

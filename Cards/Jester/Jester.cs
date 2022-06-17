@@ -74,7 +74,7 @@ namespace Ported_FFC.Cards.Jester
 
         protected override GameObject GetCardArt()
         {
-            return null;
+            return PFFC.RS_Assets.LoadAsset<GameObject>("C_JESTER");
         }
 
         public override string GetModName()

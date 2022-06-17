@@ -1,4 +1,6 @@
 ﻿using ClassesManagerReborn.Util;
+using HarmonyLib;
+using Ported_FFC.Extensions;
 using Ported_FFC.Utils;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,7 @@ namespace Ported_FFC.Cards.Juggernaut
         private const float MovementSpeed = 0.65f;
         private const float JumpHight = 0.75f;
         private const float Size = 1.60f;
+        private const float Healing = 0.30f;
 
         internal static CardInfo Card = null;
         protected override string GetTitle()
@@ -44,6 +47,7 @@ namespace Ported_FFC.Cards.Juggernaut
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
+            characterStats.GetAdditionalData().healing *= Healing;
         }
 
         public override void OnRemoveCard()
@@ -55,7 +59,8 @@ namespace Ported_FFC.Cards.Juggernaut
             return new[] {
                 ManageCardInfoStats.BuildCardInfoStat("Health", true, MaxHealth),
                 ManageCardInfoStats.BuildCardInfoStat("Movement Speed", false, MovementSpeed),
-                ManageCardInfoStats.BuildCardInfoStat("Jump Hight", false, JumpHight)
+                ManageCardInfoStats.BuildCardInfoStat("Jump Hight", false, JumpHight),
+                ManageCardInfoStats.BuildCardInfoStat("Healing", false, Healing)
             };
         }
 
@@ -71,7 +76,7 @@ namespace Ported_FFC.Cards.Juggernaut
 
         protected override GameObject GetCardArt()
         {
-            return null;
+            return PFFC.RS_Assets.LoadAsset<GameObject>("C_JUGGERNAUT");
         }
 
         public override string GetModName()
@@ -79,4 +84,15 @@ namespace Ported_FFC.Cards.Juggernaut
             return PFFC.ModInitials;
         }
     }
+    [Serializable]
+    [HarmonyPatch(typeof(HealthHandler), "Heal")]
+    public class Patch
+    {
+        private static void Prefix(HealthHandler __instance, ref float healAmount)
+        {
+            Player player = (Player)__instance.GetFieldValue("player");
+            healAmount *= player.data.stats.GetAdditionalData().healing;
+        }
+    }
+
 }
