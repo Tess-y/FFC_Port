@@ -24,7 +24,7 @@ namespace Ported_FFC
     {
         private const string ModId = "root.port.fluxxfield.fluxxfieldscards";
         private const string ModName = "Port of FFC";
-        private const string Version = "1.1.3";
+        private const string Version = "1.2";
         public const string ModInitials = "PFFC";
         internal static AssetBundle RS_Assets;
         public static PFFC instance { get; private set; }
@@ -51,6 +51,7 @@ namespace Ported_FFC
             CustomCard.BuildCard<ArmorPlating>((card) => ArmorPlating.Card = card);
             CustomCard.BuildCard<Conditioning>((card) => Conditioning.Card = card);
             CustomCard.BuildCard<SizeMatters>((card) => SizeMatters.Card = card);
+            CustomCard.BuildCard<Steroids>((card) => Steroids.Card = card);
 
 
             CustomCard.BuildCard<LightGunner>((card) => LightGunner.Card = card);

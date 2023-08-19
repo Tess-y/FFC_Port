@@ -15,6 +15,7 @@ namespace Ported_FFC.Extensions
         public float adaptiveMovementSpeed;
         public float adaptiveGravity;
         public float healing;
+        public float damageReduction;
         public int extendedMags;
         public int kingOfFools;
         public int healthCost;
@@ -27,6 +28,7 @@ namespace Ported_FFC.Extensions
             adaptiveMovementSpeed = 0f;
             adaptiveGravity = 0f;
             healing = 1;
+            damageReduction = 0;
             extendedMags = 1;
             kingOfFools = 0;
             healthCost = 0;

@@ -19,6 +19,7 @@ namespace Ported_FFC.Cards.Juggernaut
             ClassesRegistry.Register(Conditioning.Card, CardType.Card, Juggernaut.Card);
             ClassesRegistry.Register(SizeMatters.Card, CardType.Card, Juggernaut.Card);
             ClassesRegistry.Register(ArmorPlating.Card, CardType.Card, Juggernaut.Card);
+            ClassesRegistry.Register(Steroids.Card, CardType.Card, Juggernaut.Card, 6);
         }
     }
 }

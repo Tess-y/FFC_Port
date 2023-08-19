@@ -17,7 +17,7 @@ namespace Ported_FFC.Cards.Juggernaut
         private const float MovementSpeed = 0.65f;
         private const float JumpHight = 0.75f;
         private const float Size = 1.60f;
-        private const float Healing = 0.30f;
+        private const float Healing = 0.50f;
 
         internal static CardInfo Card = null;
         protected override string GetTitle()
