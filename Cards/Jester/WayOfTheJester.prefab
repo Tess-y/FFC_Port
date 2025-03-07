@@ -66,7 +66,7 @@ MonoBehaviour:
   soundDisableBlockBasic: 0
   cardName: Way of the Jester
   cardDestription: 'PASSIVE: Your stats increase as your pick cards that give you
-    more bounces. Stats are added per bounce. Capped at 25 bounces. Thanks Pong! ;)"'
+    more bounces. Stats are added per bounce. Capped at 25 bounces. Thanks Pong! ;)'
   cardStats:
   - positive: 1
     amount: +5%
